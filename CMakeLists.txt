@@ -71,12 +71,12 @@ target_include_directories(edlib PUBLIC
 
 # Build binaries.
 
-include(CTest)
+# include(CTest)
 
 if(EDLIB_BUILD_UTILITIES)
   if(NOT WIN32) # If on windows, do not build binaries that do not support windows.
-    add_executable(edlib-aligner apps/aligner/aligner.cpp)
-    target_link_libraries(edlib-aligner edlib)
+    add_executable(edlib-align align.c)
+    target_link_libraries(edlib-align edlib)
   endif()
 endif()
 
