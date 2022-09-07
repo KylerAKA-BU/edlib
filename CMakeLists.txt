@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.2 FATAL_ERROR)
 project(edlib VERSION 1.2.6)
 
 option(EDLIB_ENABLE_INSTALL "Generate the install target" ON)
-option(EDLIB_BUILD_EXAMPLES "Build examples" ON)
 option(EDLIB_BUILD_UTILITIES "Build utilities" ON)
 
 set(MACOSX (${CMAKE_SYSTEM_NAME} MATCHES "Darwin"))
@@ -71,18 +70,8 @@ target_include_directories(edlib PUBLIC
     $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
 
 # Build binaries.
-if(EDLIB_BUILD_EXAMPLES)
-  add_executable(helloWorld apps/hello-world/helloWorld.c)
-  target_link_libraries(helloWorld edlib)
-endif()
 
 include(CTest)
-if (BUILD_TESTING)
-  add_executable(runTests test/runTests.cpp)
-  target_link_libraries(runTests edlib)
-
-  add_test(edlib_tests ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/runTests)
-endif()
 
 if(EDLIB_BUILD_UTILITIES)
   if(NOT WIN32) # If on windows, do not build binaries that do not support windows.
